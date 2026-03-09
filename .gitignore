@@ -1,0 +1,15 @@
+__pycache__/
+.env
+.git/
+
+# Jupyter notebook artifacts
+.ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/
+
+# Packaging/build artifacts from `pip install .`
+build/
+dist/
+*.egg-info/
+
+# Local data (not versioned)
+data/
