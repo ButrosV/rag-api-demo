@@ -13,3 +13,8 @@ dist/
 
 # Local data (not versioned)
 data/
+index/
+
+# Project dev notes
+*_NOTES.md
+

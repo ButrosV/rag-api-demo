@@ -7,26 +7,26 @@ Work through the sections in order; each item is a concrete todo.
 
 ### 1. Clarify scope & success criteria
 
-- [ ] **Confirm goal**: Single `/ask` endpoint that answers questions grounded only in the NVIDIA document and returns supporting chunks.
-- [ ] **Confirm non-goals**: No UI, no multi-tenant auth, no external databases (unless later extended).
+- [X] **Confirm goal**: Single `/ask` endpoint that answers questions grounded only in the NVIDIA document and returns supporting chunks.
+- [X] **Confirm non-goals**: No UI, no multi-tenant auth, no external databases (unless later extended).
 - [ ] **Define “good enough”**: Agree on a small set of example questions where answers must be accurate and grounded.
 
 ---
 
 ### 2. Environment & tooling
 
-- [ ] **Create Python environment** (conda env or venv, Python 3.13).
-- [ ] **Add dependency file** (`pyproject.toml` or `requirements.txt`) with FastAPI, Uvicorn, OpenAI SDK, vector store (Chroma/FAISS), PDF loader, pytest.
-- [ ] **Create `.env.example`** documenting required variables (e.g., `OPENAI_API_KEY`, model names, index path).
-- [ ] **Install and configure basic tooling**: `black`, `ruff` (optional but recommended).
+- [X] **Create Python environment** (conda env or venv, Python 3.13).
+- [X] **Add dependency file** (`pyproject.toml` or `requirements.txt`) with FastAPI, Uvicorn, OpenAI SDK, vector store (Chroma/FAISS), PDF loader, pytest.
+- [X] **Create `.env.example`** documenting required variables (e.g., `OPENAI_API_KEY`, model names, index path).
+- [X] **Install and configure basic tooling**: `black`, `ruff` (optional but recommended).
 
 ---
 
 ### 3. Project structure & config
 
-- [ ] **Create base folders**: `app/`, `ingestion/`, `tests/`.
-- [ ] **Create core app files**: `app/main.py`, `app/rag_pipeline.py`, `app/models.py`, `app/config.py`.
-- [ ] **Create ingestion files**: `ingestion/build_index.py`, `ingestion/loaders.py`.
+- [X] **Create base folders**: `app/`, `ingestion/`, `tests/`.
+- [X] **Create core app files**: `app/main.py`, `app/rag_pipeline.py`, `app/models.py`, `app/config.py`.
+- [X] **Create ingestion files**: `ingestion/build_index.py`, `ingestion/loaders.py`.
 - [ ] **Implement `config.py`** to load settings from env (API key, model names, index directory, chunk params).
 
 ---
