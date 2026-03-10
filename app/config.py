@@ -2,16 +2,19 @@ from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+DOTENV_PATH = PROJECT_ROOT / ".env"
+
 
 class Settings(BaseSettings):
     """
-    Minimal settings for this RAG API.
+    RAG API configuration settings.
 
-    Loaded from environment variables and/or a local `.env` file (see `.env.example`).
-    Keep real secrets in `.env` (git-ignored).
+    Loads from environment variables and .env file (see .env.example).
+    Required secrets go in .env.
     """
 
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore", case_sensitive=False)
+    model_config = SettingsConfigDict(env_file=str(DOTENV_PATH), extra="ignore", case_sensitive=False)
 
     openai_api_key: str
     openai_model: str = "gpt-4.1-mini"
@@ -21,6 +24,9 @@ class Settings(BaseSettings):
 
 
 def get_settings() -> Settings:
-    # Kept as a function so you can later add caching/lazy-loading if needed.
+    """
+    Factory function to create Settings instance.
+    Loads configuration from .env file and environment variables with hardcoded defaults.
+    :return: Settings instance for API and ingestion use.
+    """
     return Settings()
-

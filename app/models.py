@@ -15,4 +15,3 @@ class ContextChunk(BaseModel):
 class AskResponse(BaseModel):
     answer: str
     contexts: list[ContextChunk]
-

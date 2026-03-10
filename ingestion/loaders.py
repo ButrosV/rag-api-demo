@@ -12,4 +12,3 @@ class PageText:
 def load_pdf_pages(path: Path) -> Iterable[PageText]:
     # Placeholder implementation to be filled in later.
     raise NotImplementedError
-

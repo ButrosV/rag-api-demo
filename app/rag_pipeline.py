@@ -13,4 +13,3 @@ class RetrievedChunk:
 def retrieve_and_answer(question: str) -> tuple[str, Sequence[RetrievedChunk]]:
     # Placeholder implementation to be filled in later.
     raise NotImplementedError
-

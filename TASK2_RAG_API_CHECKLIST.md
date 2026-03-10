@@ -9,7 +9,7 @@ Work through the sections in order; each item is a concrete todo.
 
 - [X] **Confirm goal**: Single `/ask` endpoint that answers questions grounded only in the NVIDIA document and returns supporting chunks.
 - [X] **Confirm non-goals**: No UI, no multi-tenant auth, no external databases (unless later extended).
-- [ ] **Define “good enough”**: Agree on a small set of example questions where answers must be accurate and grounded.
+- [X] **Define “good enough”**: Agree on a small set of example questions where answers must be accurate and grounded.
 
 ---
 
@@ -27,16 +27,16 @@ Work through the sections in order; each item is a concrete todo.
 - [X] **Create base folders**: `app/`, `ingestion/`, `tests/`.
 - [X] **Create core app files**: `app/main.py`, `app/rag_pipeline.py`, `app/models.py`, `app/config.py`.
 - [X] **Create ingestion files**: `ingestion/build_index.py`, `ingestion/loaders.py`.
-- [ ] **Implement `config.py`** to load settings from env (API key, model names, index directory, chunk params).
+- [X] **Implement `config.py`** to load settings from env (API key, model names, index directory, chunk params).
 
 ---
 
 ### 4. Choose models & vector store
 
-- [ ] **Decide provider**: OpenAI vs Azure OpenAI.
-- [ ] **Select chat model** (e.g., `gpt-4.1-mini` / `gpt-4o-mini` or equivalent).
-- [ ] **Select embedding model** (e.g., `text-embedding-3-small` or equivalent).
-- [ ] **Select vector store** (Chroma or FAISS) and define persistence path (e.g., `./index/`).
+- [X] **Decide provider**: OpenAI vs Azure OpenAI.
+- [X] **Select chat model** (e.g., `gpt-4.1-mini` / `gpt-4o-mini` or equivalent).
+- [X] **Select embedding model** (e.g., `text-embedding-3-small` or equivalent).
+- [X] **Select vector store** (Chroma or FAISS) and define persistence path (e.g., `./index/`).
 
 ---
 

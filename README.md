@@ -1,6 +1,6 @@
 ## NVIDIA RAG API Showcase
 
-A small, self-contained Retrieval-Augmented Generation (RAG) API over a single NVIDIA PDF document, implemented with FastAPI and OpenAI. The focus is clean architecture, testability, and clear grounding of answers in the source document.
+A small, self-contained Retrieval-Augmented Generation (RAG) API over NVIDIA's Q2 FY2024 earnings press release, implemented with FastAPI and OpenAI. Focuses on clean architecture, testability, and clear grounding of answers in source document.
 
 ---
 
@@ -43,10 +43,16 @@ rag-api-nwidia/
     test_ingestion.py     # Unit tests for chunking and index build
     test_rag_pipeline.py  # Retrieval + generation tests
     test_api.py           # FastAPI endpoint tests
+      data/                 # Test data
+        test_questions.json   # 5  questions + expected answers
+        expected_answers.md   # evaluation criteria
 
   notebooks/
     01_experiments_ingestion.ipynb   # Optional: EDA on PDF text, chunking trials
     02_experiments_retrieval.ipynb # Optional: manual inspection of retrieved chunks
+
+  data/                 # input data (gitignored)
+    NVIDIAAn.pdf        # input dataset
 ```
 
 ---
@@ -56,12 +62,12 @@ rag-api-nwidia/
 - **Python version**: 3.11 (stable, widely supported for libraries used here).
 - **Core stack**:
   - `fastapi`, `uvicorn[standard]` – API and ASGI server.
-  - `openai` – LLM and embedding models.
+  - `openai` –  LLM (gpt-4.1-mini) + embeddings (text-embedding-3-small).
   - `chromadb` – local vector store for similarity search.
   - `pypdf` – NVIDIA PDF parsing.
   - `python-dotenv` – load `.env` into environment.
   - `pytest`, `httpx` – testing.
-  - `black`, `ruff` – formatting and linting.
+  - `ruff` – formatting and linting.
 - **Dev-only (optional)**:
   - `jupyterlab` – exploratory experiments in `notebooks/`.
 
@@ -116,7 +122,7 @@ LOG_LEVEL=info
    ```bash
    curl -X POST http://localhost:8000/ask \
      -H "Content-Type: application/json" \
-     -d '{"question": "What does the NVIDIA document say about X?"}'
+     -d '{"question": "What was NVIDIA Q2 revenue?"}'
    ```
 
    Expected JSON response:
@@ -151,4 +157,6 @@ Planned tests:
 - Ingestion: chunking behavior and index build.
 - RAG pipeline: retrieval correctness on a small synthetic index, end-to-end generation.
 - API: `POST /ask` validation and basic success/error cases.
-
+- Output content evaluation suite in `tests/data/`:
+    - test_questions.json: 5 questions with expected answers/context
+    - expected_answers.md: Detailed success criteria per question for human evaluation
