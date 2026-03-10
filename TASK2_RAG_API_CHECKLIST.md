@@ -45,9 +45,9 @@ Work through the sections in order; each item is a concrete todo.
 - [X] **Implement PDF loading** in `ingestion/loaders.py`:
   - [X] Load NVIDIA PDF from disk.
   - [X] Extract text per page (and keep page numbers).
-- [ ] **Implement chunking logic**:
-  - [ ] Decide chunk size and overlap (e.g., 500–1000 chars, 100–200 overlap).
-  - [ ] Produce chunks with metadata: `id`, `text`, `page`.
+- [X] **Implement chunking logic**:
+  - [X] Decide chunk size and overlap (e.g., 500–1000 chars, 100–200 overlap).
+  - [X] Produce chunks with metadata: `id`, `text`, `page`.
 - [ ] **Implement embedding + index creation** in `ingestion/build_index.py`:
   - [ ] For each chunk, call embedding model.
   - [ ] Store vectors + metadata into Chroma/FAISS.
