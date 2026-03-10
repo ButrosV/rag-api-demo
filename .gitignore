@@ -13,8 +13,13 @@ dist/
 
 # Local data (not versioned)
 data/
+*.pdf
 index/
+*.sqlite3
 
 # Project dev notes
 *_NOTES.md
+
+# ruff files
+.ruff_cache/
 

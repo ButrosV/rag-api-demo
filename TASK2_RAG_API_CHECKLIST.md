@@ -48,10 +48,10 @@ Work through the sections in order; each item is a concrete todo.
 - [X] **Implement chunking logic**:
   - [X] Decide chunk size and overlap (e.g., 500–1000 chars, 100–200 overlap).
   - [X] Produce chunks with metadata: `id`, `text`, `page`.
-- [ ] **Implement embedding + index creation** in `ingestion/build_index.py`:
-  - [ ] For each chunk, call embedding model.
-  - [ ] Store vectors + metadata into Chroma/FAISS.
-  - [ ] Persist index to disk.
+- [X] **Implement embedding + index creation** in `ingestion/build_index.py`:
+  - [X] For each chunk, call embedding model.
+  - [X] Store vectors + metadata into Chroma.
+  - [X] Persist index to disk.
 - [ ] **Add minimal tests** for ingestion (`tests/test_ingestion.py`):
   - [ ] Chunking produces expected number/size of chunks on sample text.
   - [ ] Index builds successfully and can be reloaded.
