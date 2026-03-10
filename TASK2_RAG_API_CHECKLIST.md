@@ -42,9 +42,9 @@ Work through the sections in order; each item is a concrete todo.
 
 ### 5. Ingestion & index build (offline)
 
-- [ ] **Implement PDF loading** in `ingestion/loaders.py`:
-  - [ ] Load NVIDIA PDF from disk.
-  - [ ] Extract text per page (and keep page numbers).
+- [X] **Implement PDF loading** in `ingestion/loaders.py`:
+  - [X] Load NVIDIA PDF from disk.
+  - [X] Extract text per page (and keep page numbers).
 - [ ] **Implement chunking logic**:
   - [ ] Decide chunk size and overlap (e.g., 500–1000 chars, 100–200 overlap).
   - [ ] Produce chunks with metadata: `id`, `text`, `page`.
