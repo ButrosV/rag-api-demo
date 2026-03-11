@@ -12,6 +12,7 @@ dependencies = [
   "fastapi",
   "uvicorn[standard]",
   "openai",
+  "tenacity",
   "chromadb",
   "pypdf",
   "python-dotenv",

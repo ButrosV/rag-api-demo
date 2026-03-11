@@ -63,6 +63,7 @@ rag-api-nwidia/
 - **Core stack**:
   - `fastapi`, `uvicorn[standard]` – API and ASGI server.
   - `openai` –  LLM (gpt-4.1-mini) + embeddings (text-embedding-3-small).
+  - `tenacity` - retry decorators for LLM,
   - `chromadb` – local vector store for similarity search.
   - `pypdf` – NVIDIA PDF parsing.
   - `python-dotenv` – load `.env` into environment.

@@ -61,13 +61,13 @@ Work through the sections in order; each item is a concrete todo.
 
 ### 6. Retrieval & generation pipeline (online)
 
-- [ ] **Implement retrieval function** in `app/rag_pipeline.py`:
-  - [ ] Load vector store from disk at startup.
-  - [ ] Given a question, compute embedding and perform `top_k` similarity search.
-  - [ ] Return ranked chunks with scores and metadata.
-- [ ] **Design prompts**:
-  - [ ] System prompt: answer **only** using provided context from NVIDIA document, otherwise say “I don’t know”.
-  - [ ] User prompt: include the question + structured list of retrieved contexts.
+- [X] **Implement retrieval function** in `app/rag_pipeline.py`:
+  - [X] Load vector store from disk at startup.
+  - [X] Given a question, compute embedding and perform `top_k` similarity search.
+  - [X] Return ranked chunks with scores and metadata.
+- [X] **Design prompts**:
+  - [X] System prompt: answer **only** using provided context from NVIDIA document, otherwise say “I don’t know”.
+  - [X] User prompt: include the question + structured list of retrieved contexts.
 - [ ] **Implement generation function**:
   - [ ] Call chat model with system + user messages.
   - [ ] Return answer string and the contexts used.
