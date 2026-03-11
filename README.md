@@ -66,7 +66,7 @@ rag-api-nwidia/
   - `chromadb` – local vector store for similarity search.
   - `pypdf` – NVIDIA PDF parsing.
   - `python-dotenv` – load `.env` into environment.
-  - `pytest`, `httpx` – testing.
+  - `pytest`, `pytest-mock`, `httpx` – testing.
   - `ruff` – formatting and linting.
 - **Dev-only (optional)**:
   - `jupyterlab` – exploratory experiments in `notebooks/`.
