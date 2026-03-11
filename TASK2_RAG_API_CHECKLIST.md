@@ -68,12 +68,12 @@ Work through the sections in order; each item is a concrete todo.
 - [X] **Design prompts**:
   - [X] System prompt: answer **only** using provided context from NVIDIA document, otherwise say “I don’t know”.
   - [X] User prompt: include the question + structured list of retrieved contexts.
-- [ ] **Implement generation function**:
-  - [ ] Call chat model with system + user messages.
-  - [ ] Return answer string and the contexts used.
-- [ ] **Add tests** for pipeline (`tests/test_rag_pipeline.py`):
-  - [ ] With a small synthetic index, verify that a simple query retrieves the right chunk(s).
-  - [ ] Verify answer is non-empty and refers to retrieved context.
+- [X] **Implement generation function**:
+  - [X] Call chat model with system + user messages.
+  - [X] Return answer string and the contexts used.
+- [X] **Add tests** for pipeline (`tests/test_rag_pipeline.py`):
+  - [X] With a small synthetic index, verify that a simple query retrieves the right chunk(s).
+  - [X] Verify answer is non-empty and refers to retrieved context.
 
 ---
 
@@ -98,7 +98,7 @@ Work through the sections in order; each item is a concrete todo.
 
 ### 8. Evaluation & manual validation
 
-- [ ] **Prepare a small eval set** of realistic questions about the NVIDIA document.
+- [X] **Prepare a small eval set** of realistic questions about the NVIDIA document.
 - [ ] **Run manual checks**:
   - [ ] Answers are correct and clearly supported by returned chunks.
   - [ ] When information is missing from the document, the model says “I don’t know”.
@@ -122,4 +122,3 @@ Work through the sections in order; each item is a concrete todo.
   - [ ] Example `curl`/HTTP request to `/ask`.
 - [ ] **Add `TASK2_RAG_API_NOTES.md` link** from README for deeper design notes.
 - [ ] **Optionally add a `Makefile`** or scripts for common tasks (`make ingest`, `make run-api`, `make test`).
-
