@@ -15,7 +15,7 @@ class PageText:
 class Chunk:
     id: str
     text: str
-    page: int
+    page: int | None
     start_char: int
     length: int
 

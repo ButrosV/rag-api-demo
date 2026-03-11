@@ -8,6 +8,7 @@ from app.config import get_settings
 
 settings = get_settings()
 
+
 @pytest.fixture
 def sample_pages() -> list[PageText]:
     """
@@ -16,8 +17,7 @@ def sample_pages() -> list[PageText]:
     one short page (100+ chars) for single-chunk testing.
     :return: List of PageText objects with page_number and text attributes.
     """
-    return [PageText(page_number=5, text="Long pages. " * 100),
-            PageText(page_number=6, text="Short page. " * 5)]
+    return [PageText(page_number=5, text="Long pages. " * 100), PageText(page_number=6, text="Short page. " * 5)]
 
 
 def test_chunking_sample(sample_pages) -> None:
@@ -25,11 +25,11 @@ def test_chunking_sample(sample_pages) -> None:
     Verify chunk_pages() produces correct chunks from sample pages with overlap.
     Test sliding window chunking logic:
     1) Validates expected chunk count calculation.
-    2) correct ID format (p5_c1), 
+    2) correct ID format (p5_c1),
     3) page attribution,
     4) chunk length boundaries (400-500 chars with 100 overlap),
-    5) page metadata preservation across multi-page input. 
-    
+    5) page metadata preservation across multi-page input.
+
     :param sample_pages: Fixture providing standard test PageText objects (pages 5-6).
     :raises AssertionError: If chunk count, ID format, text length, or page metadata incorrect.
     """
@@ -51,16 +51,16 @@ def test_index_build_end_to_end(tmp_path: Path, mocker, sample_pages) -> None:
     1. Chroma creates sqlite3 database and parquet files
     2. Collection uses configured name from settings
     3. Document count matches expected chunks from sample_pages
-       
+
     :param tmp_path: pytest fixture for temporary filesystem.
     :param mocker: pytest-mock fixture for function replacement.
     :param sample_pages: Test PageText data for consistent chunk count.
     :raises AssertionError: If index files missing, collection empty, or wrong name.
     """
-    mocker.patch('ingestion.loaders.load_pdf_pages', return_value=sample_pages)
+    mocker.patch("ingestion.loaders.load_pdf_pages", return_value=sample_pages)
 
     test_pdf = tmp_path / "test.pdf"
-    test_pdf.touch() 
+    test_pdf.touch()
 
     index_dir = tmp_path / "test_index"
 

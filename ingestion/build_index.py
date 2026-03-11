@@ -1,10 +1,10 @@
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import List
 import logging
 import chromadb
 from openai import OpenAI
 
-from ingestion.loaders import load_pdf_pages, chunk_pages, PageText, Chunk
+from ingestion.loaders import load_pdf_pages, chunk_pages, Chunk
 from app.config import get_settings
 
 settings = get_settings()

@@ -52,10 +52,10 @@ Work through the sections in order; each item is a concrete todo.
   - [X] For each chunk, call embedding model.
   - [X] Store vectors + metadata into Chroma.
   - [X] Persist index to disk.
-- [ ] **Add minimal tests** for ingestion (`tests/test_ingestion.py`):
-  - [ ] Chunking produces expected number/size of chunks on sample text.
-  - [ ] Index builds successfully and can be reloaded.
-- [ ] **Run ingestion locally** to generate the index once.
+- [X] **Add minimal tests** for ingestion (`tests/test_ingestion.py`):
+  - [X] Chunking produces expected number/size of chunks on sample text.
+  - [X] Index builds successfully and can be reloaded.
+- [X] **Run ingestion locally** to generate the index once.
 
 ---
 
