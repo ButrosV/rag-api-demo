@@ -20,6 +20,6 @@ class ContextChunk(BaseModel):
 class AskResponse(BaseModel):
     answer: str = Field(..., min_length=1, max_length=2000, description="LLM-generated answer string")
     contexts: list[ContextChunk] = Field(
-        ..., min_items=1, max_items=10, description="List of retrieved context chunks (max 10)"
+        ..., min_length=1, max_length=10, description="List of retrieved context chunks (max 10)"
     )
     timestamp: datetime = Field(default_factory=datetime.utcnow, description="Response generation timestamp (UTC)")
