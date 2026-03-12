@@ -101,13 +101,13 @@ This is a high-level, best-practice roadmap for implementing a small NVIDIA‑do
 - [X] **Run manual checks**:
   - [X] Answers are correct and clearly supported by returned chunks.
   - [X] When information is missing from the document, the model says “I don’t know”.
-- [ ] **Iterate on chunking & retrieval** parameters if answers are too generic or hallucinated.
+- [X] **Iterate on chunking & retrieval** parameters if answers are too generic or hallucinated.
 
 ---
 
 ### 9. Observability & robustness (nice-to-have)
 
-- [ ] **Add basic logging** (question text, latency, number of chunks, truncated answer) with PII-safe practices.
+- [X] **Add basic logging** (question text, latency, number of chunks, truncated answer) with PII-safe practices.
 - [X] **Expose simple health endpoint** (e.g., `GET /health`) to report that index and API key are available.
 - [X] **Add basic rate limiting or guardrails** if needed (e.g., max question length).
 
@@ -115,9 +115,9 @@ This is a high-level, best-practice roadmap for implementing a small NVIDIA‑do
 
 ### 10. Packaging & documentation
 
-- [ ] **Write a short `README.md`**:
-  - [ ] Project overview and architecture diagram (optional).
-  - [ ] How to set up env, run ingestion, start API, and run tests.
-  - [ ] Example `curl`/HTTP request to `/ask`.
-- [ ] **Add `TASK2_RAG_API_NOTES.md` link** from README for deeper design notes.
-- [ ] **Optionally add a `Makefile`** or scripts for common tasks (`make ingest`, `make run-api`, `make test`).
+- [X] **Write a short `README.md`**:
+  - [X] Project overview and architecture diagram (optional).
+  - [X] How to set up env, run ingestion, start API, and run tests.
+  - [X] Example `curl`/HTTP request to `/ask`.
+- [X] **Optionally add a link from README to any public design notes** (if you decide to share them in-repo).
+- [X] **Optionally add a `Makefile`** or scripts for common tasks (`make ingest`, `make run-api`, `make test`).

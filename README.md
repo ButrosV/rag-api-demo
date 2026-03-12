@@ -4,7 +4,7 @@ A small, self-contained Retrieval-Augmented Generation (RAG) API over NVIDIA's Q
 
 ---
 
-### Task & Goal
+### Task, goal & outcome
 
 - **Task**: Build a `POST /ask` API that:
   - Accepts a natural-language question.
@@ -15,6 +15,10 @@ A small, self-contained Retrieval-Augmented Generation (RAG) API over NVIDIA's Q
   - Clear separation between ingestion, retrieval, and API layers.
   - Basic tests and config management.
   - Optional notebooks for exploration, not for core logic.
+- **Observed outcome (from manual eval in `notebooks/01_sanity_checks_and_experiments.ipynb`)**:
+  - On a 5-question eval set, answers were **accurate and concise**, including correct extraction of key numbers (e.g. \$13.51B revenue, 70.1% GAAP gross margin).
+  - The model correctly answered “**I don’t know**” when the document did not contain the requested information (AMD/Intel competitors).
+  - Retrieved contexts were generally relevant; remaining misses are mainly due to **PDF table extraction limits** in `pypdf`, not the RAG wiring.
 
 ---
 
@@ -23,11 +27,11 @@ A small, self-contained Retrieval-Augmented Generation (RAG) API over NVIDIA's Q
 ```text
 rag-api-nwidia/
   README.md
-  pyproject.toml          # Project metadata + dependencies (Python 3.11)
+  Makefile               # Common tasks: install, test, ingest, run-api
+  pyproject.toml         # Project metadata + dependencies (Python 3.11)
   .env.example            # Template for local secrets/config
   .gitignore              
-  TASK2_RAG_API_NOTES.md  # Design notes and planning
-  TASK2_RAG_API_CHECKLIST.md  # Implementation checklist (step-by-step todos)
+  TASK2_RAG_API_CHECKLIST.md  # Public implementation checklist (step-by-step todos)
 
   app/
     main.py               # FastAPI app, /ask endpoint and wiring
@@ -43,13 +47,12 @@ rag-api-nwidia/
     test_ingestion.py     # Unit tests for chunking and index build
     test_rag_pipeline.py  # Retrieval + generation tests
     test_api.py           # FastAPI endpoint tests
-      data/                 # Test data
-        test_questions.json   # 5  questions + expected answers
-        expected_answers.md   # evaluation criteria
+  tests/data/             # Small, version-controlled eval fixtures
+    test_questions.json   # 5 questions + expected answers/contexts
+    expected_answers.md   # Human-readable evaluation criteria
 
   notebooks/
-    01_experiments_ingestion.ipynb   # Optional: EDA on PDF text, chunking trials
-    02_experiments_retrieval.ipynb # Optional: manual inspection of retrieved chunks
+    01_sanity_checks_and_experiments.ipynb  # Optional: ingestion + retrieval + API sanity checks
 
   data/                 # input data (gitignored)
     NVIDIAAn.pdf        # input dataset
@@ -76,7 +79,11 @@ Create and activate a Python 3.11 environment (e.g. if with mamba/conda `mamba c
 
 ```bash
 pip install .
-pip install ".[dev]"   # adds JupyterLab and other dev extras if needed
+# or, if you prefer extras for notebooks:
+# pip install ".[dev]"
+
+# Using the Makefile (optional, convenient):
+make install           # installs project in editable mode via pyproject.toml
 ```
 
 ---
@@ -103,7 +110,15 @@ LOG_LEVEL=info
 1. **Build the vector index (offline ingestion)**
 
    ```bash
+   # direct
    python -m ingestion.build_index
+
+   # or via Makefile
+   make ingest            # build index
+
+   # clean and rebuild index directory
+   make clean-index       # remove existing index dir
+   make ingest            # or: make rebuild-index
    ```
 
    This loads the NVIDIA PDF, chunks it, computes embeddings, and persists a vector index under `INDEX_DIR` (e.g. `./index`).
@@ -111,7 +126,11 @@ LOG_LEVEL=info
 2. **Run the API**
 
    ```bash
-   uvicorn app.main:app --reload
+   # direct (port 8001 to avoid clashes)
+   uvicorn app.main:app --reload --port 8001
+
+   # or via Makefile
+   make run-api
    ```
 
    The API will load config, open the persisted index, and expose:
@@ -121,7 +140,7 @@ LOG_LEVEL=info
 3. **Query the RAG API**
 
    ```bash
-   curl -X POST http://localhost:8000/ask \
+   curl -X POST http://localhost:8001/ask \
      -H "Content-Type: application/json" \
      -d '{"question": "What was NVIDIA Q2 revenue?"}'
    ```
@@ -130,6 +149,19 @@ LOG_LEVEL=info
 
    - `answer`: grounded natural-language answer.
    - `contexts`: list of chunks with `id`, `text`, `page`, and similarity `score`.
+
+4. **Format, lint, and test (local dev helpers)**
+
+   With the included `Makefile` you can run common tasks quickly:
+
+   ```bash
+   make format             # ruff format .
+   make lint               # ruff check .
+   make fix                # ruff check . --fix
+   make test               # pytest tests
+   make test-ingestion-e2e # RUN_INGESTION_E2E=1 pytest tests/test_ingestion.py -v
+   make check              # lint + test
+   ```
 
 ---
 
@@ -145,7 +177,7 @@ LOG_LEVEL=info
 
 ---
 
-### Testing
+### Testing & checklist
 
 - Run the full test suite:
 
@@ -161,3 +193,5 @@ Planned tests:
 - Output content evaluation suite in `tests/data/`:
     - test_questions.json: 5 questions with expected answers/context
     - expected_answers.md: Detailed success criteria per question for human evaluation
+
+- See `TASK2_RAG_API_CHECKLIST.md` for a high-level, step-by-step checklist of the implementation.
