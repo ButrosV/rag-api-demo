@@ -88,10 +88,10 @@ This is a high-level, best-practice roadmap for implementing a small NVIDIA‑do
     - [X] Validates `question` (non-empty, reasonable length).
     - [X] Calls retrieval + generation.
     - [X] Returns `AskResponse`.
-  - [ ] Add basic error handling (e.g., missing index, upstream LLM error).
-- [ ] **Add API tests** in `tests/test_api.py`:
-  - [ ] `POST /ask` with valid question → 200 + answer + non-empty contexts.
-  - [ ] Empty question → 4xx with clear error message.
+  - [X] Add basic error handling (e.g., missing index, upstream LLM error).
+- [X] **Add API tests** in `tests/test_api.py`:
+  - [X] `POST /ask` with valid question → 200 + answer + non-empty contexts.
+  - [X] Empty question → 4xx with clear error message.
 
 ---
 

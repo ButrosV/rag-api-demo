@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from chromadb import PersistentClient
 from openai import OpenAI, APIError, RateLimitError
 from tenacity import retry, stop_after_attempt, wait_exponential
+from fastapi import HTTPException
 
 from app.config import get_settings
 from ingestion.build_index import embedd_chunks
@@ -131,18 +132,30 @@ def retrieve_and_answer(question: str, top_k: int = 5) -> tuple[str, list[Retrie
 
 def api_retrieve_and_answer(question: str, top_k: int = 5) -> AskResponse:
     """
-    Format RAG output for API response.
+    Format RAG output for API response with error handling.
 
-    Converts RetrievedChunk to ContextChunk and packages with LLM answer.
+    Convert RetrievedChunk to ContextChunk and packages with LLM answer.
+    Validate index exists and collection accessible before processing.
 
     :param question: User query for RAG pipeline
     :param top_k: Number of context chunks to retrieve (default: 5)
     :return: AskResponse object containing answer and context details
+    :raises HTTPException: 503 (missing index), 500 (pipeline failure)
     """
-    answer, retrieved_chunks = retrieve_and_answer(question, top_k=top_k)
+    try:
+        if not settings.index_dir.exists():
+            raise HTTPException(status_code=503, detail="Vector index directory missing")  # service unavailable
+        collection.count()  # check to ensure collection is accessible
 
-    context_chunks = [
-        ContextChunk(id=chunk.id, text=chunk.text, page=chunk.page, score=chunk.score) for chunk in retrieved_chunks
-    ]
+        answer, retrieved_chunks = retrieve_and_answer(question, top_k=top_k)
+        context_chunks = [
+            ContextChunk(id=chunk.id, text=chunk.text, page=chunk.page, score=chunk.score) for chunk in retrieved_chunks
+        ]
 
-    return AskResponse(answer=answer, contexts=context_chunks)
+        return AskResponse(answer=answer, contexts=context_chunks)
+    except HTTPException:
+        raise  # Re-raise FastAPI exceptions
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"RAG pipeline failed: {str(e)[:200]}"
+        ) from None  # Internal Server Error
