@@ -1,7 +1,6 @@
 ## Task 2 – Custom RAG API Implementation Checklist
 
 This is a high-level, best-practice roadmap for implementing a small NVIDIA‑document RAG API.  
-Work through the sections in order; each item is a concrete todo.
 
 ---
 
@@ -79,16 +78,16 @@ Work through the sections in order; each item is a concrete todo.
 
 ### 7. API layer (FastAPI)
 
-- [ ] **Define Pydantic models** in `app/models.py`:
-  - [ ] `AskRequest` with `question: str`.
-  - [ ] `ContextChunk` with `id`, `text`, `page`, `score`.
-  - [ ] `AskResponse` with `answer: str` and `contexts: list[ContextChunk]`.
-- [ ] **Create FastAPI app** in `app/main.py`:
-  - [ ] Initialize config and load vector store on startup.
-  - [ ] Implement `POST /ask` endpoint that:
-    - [ ] Validates `question` (non-empty, reasonable length).
-    - [ ] Calls retrieval + generation.
-    - [ ] Returns `AskResponse`.
+- [X] **Define Pydantic models** in `app/models.py`:
+  - [X] `AskRequest` with `question: str`.
+  - [X] `ContextChunk` with `id`, `text`, `page`, `score` == `RetrievedChunk` schema.
+  - [X] `AskResponse` with `answer` and `contexts` and `timestamp`.
+- [X] **Create FastAPI app** in `app/main.py`:
+  - [X] Initialize config and load vector store on startup.
+  - [X] Implement `POST /ask` endpoint that:
+    - [X] Validates `question` (non-empty, reasonable length).
+    - [X] Calls retrieval + generation.
+    - [X] Returns `AskResponse`.
   - [ ] Add basic error handling (e.g., missing index, upstream LLM error).
 - [ ] **Add API tests** in `tests/test_api.py`:
   - [ ] `POST /ask` with valid question → 200 + answer + non-empty contexts.

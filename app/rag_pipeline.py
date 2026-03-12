@@ -7,6 +7,7 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 from app.config import get_settings
 from ingestion.build_index import embedd_chunks
 from ingestion.loaders import Chunk
+from app.schemas import AskResponse, ContextChunk
 
 settings = get_settings()
 client_emb = PersistentClient(path=settings.index_dir)
@@ -126,3 +127,22 @@ def retrieve_and_answer(question: str, top_k: int = 5) -> tuple[str, list[Retrie
     answer = prompt_llm(messages)
 
     return answer, chunks_search
+
+
+def api_retrieve_and_answer(question: str, top_k: int = 5) -> AskResponse:
+    """
+    Format RAG output for API response.
+
+    Converts RetrievedChunk to ContextChunk and packages with LLM answer.
+
+    :param question: User query for RAG pipeline
+    :param top_k: Number of context chunks to retrieve (default: 5)
+    :return: AskResponse object containing answer and context details
+    """
+    answer, retrieved_chunks = retrieve_and_answer(question, top_k=top_k)
+
+    context_chunks = [
+        ContextChunk(id=chunk.id, text=chunk.text, page=chunk.page, score=chunk.score) for chunk in retrieved_chunks
+    ]
+
+    return AskResponse(answer=answer, contexts=context_chunks)

@@ -32,7 +32,7 @@ rag-api-nwidia/
   app/
     main.py               # FastAPI app, /ask endpoint and wiring
     rag_pipeline.py       # Retrieval + generation pipeline
-    models.py             # Pydantic request/response models
+    schemas.py            # Pydantic request/response models
     config.py             # Settings and env loading
 
   ingestion/
