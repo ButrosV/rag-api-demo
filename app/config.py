@@ -1,4 +1,5 @@
 from pathlib import Path
+import logging
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -32,3 +33,16 @@ def get_settings() -> Settings:
     :return: Settings instance for API and ingestion use.
     """
     return Settings()
+
+
+def setup_logging(level: str = "INFO") -> None:
+    """
+    Configure root logging for API and ingestion scripts.
+
+    Uses a simple timestamped format and log level derived from Settings.
+    Calling this multiple times is safe; only the first call configures handlers.
+    """
+    logging.basicConfig(
+        level=getattr(logging, level.upper(), logging.INFO),
+        format="%(asctime)s %(levelname)s %(name)s - %(message)s",
+    )

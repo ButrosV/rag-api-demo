@@ -70,7 +70,7 @@ rag-api-nwidia/
   - `pytest`, `pytest-mock`, `httpx` – testing.
   - `ruff` – formatting and linting.
 - **Dev-only (optional)**:
-  - `jupyterlab` – exploratory experiments in `notebooks/`.
+  - `jupyterlab`, `pandas` – exploratory experiments in `notebooks/`.
 
 Create and activate a Python 3.11 environment (e.g. if with mamba/conda `mamba create -n rag-api python=3.11`), then install from `pyproject.toml`:
 

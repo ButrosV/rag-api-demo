@@ -30,6 +30,7 @@ packages = ["app", "ingestion"]
 dev = [
   "jupyterlab",
   "ipykernel",
+  "pandas",
 ]
 
 [tool.ruff]

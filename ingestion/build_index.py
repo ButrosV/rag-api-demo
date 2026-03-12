@@ -5,7 +5,7 @@ import chromadb
 from openai import OpenAI
 
 from ingestion.loaders import load_pdf_pages, chunk_pages, Chunk
-from app.config import get_settings
+from app.config import get_settings, setup_logging
 
 settings = get_settings()
 
@@ -66,6 +66,8 @@ if __name__ == "__main__":
     pdf_path = PROJECT_ROOT / "data" / "NVIDIAAn.pdf"
     index_dir = Path(settings.index_dir)
     index_dir.mkdir(parents=True, exist_ok=True)
+
+    setup_logging(settings.log_level)
 
     print(f"Building index from: {pdf_path.resolve()}")
     print(f"Index storage: {index_dir.resolve()}")

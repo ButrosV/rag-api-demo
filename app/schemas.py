@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 class AskRequest(BaseModel):
@@ -22,4 +22,6 @@ class AskResponse(BaseModel):
     contexts: list[ContextChunk] = Field(
         ..., min_length=1, max_length=10, description="List of retrieved context chunks (max 10)"
     )
-    timestamp: datetime = Field(default_factory=datetime.utcnow, description="Response generation timestamp (UTC)")
+    timestamp: datetime = Field(
+        default_factory=lambda: datetime.now(timezone.utc), description="Response generation timestamp (UTC)"
+    )

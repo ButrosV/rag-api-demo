@@ -98,9 +98,9 @@ This is a high-level, best-practice roadmap for implementing a small NVIDIA‑do
 ### 8. Evaluation & manual validation
 
 - [X] **Prepare a small eval set** of realistic questions about the NVIDIA document.
-- [ ] **Run manual checks**:
-  - [ ] Answers are correct and clearly supported by returned chunks.
-  - [ ] When information is missing from the document, the model says “I don’t know”.
+- [X] **Run manual checks**:
+  - [X] Answers are correct and clearly supported by returned chunks.
+  - [X] When information is missing from the document, the model says “I don’t know”.
 - [ ] **Iterate on chunking & retrieval** parameters if answers are too generic or hallucinated.
 
 ---
@@ -108,8 +108,8 @@ This is a high-level, best-practice roadmap for implementing a small NVIDIA‑do
 ### 9. Observability & robustness (nice-to-have)
 
 - [ ] **Add basic logging** (question text, latency, number of chunks, truncated answer) with PII-safe practices.
-- [ ] **Expose simple health endpoint** (e.g., `GET /health`) to report that index and API key are available.
-- [ ] **Add basic rate limiting or guardrails** if needed (e.g., max question length).
+- [X] **Expose simple health endpoint** (e.g., `GET /health`) to report that index and API key are available.
+- [X] **Add basic rate limiting or guardrails** if needed (e.g., max question length).
 
 ---
 
