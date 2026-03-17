@@ -18,7 +18,9 @@ A small, self-contained Retrieval-Augmented Generation (RAG) API over NVIDIA's Q
 - **Observed outcome (from manual eval in `notebooks/01_sanity_checks_and_experiments.ipynb`)**:
   - On a 5-question eval set, answers were **accurate and concise**, including correct extraction of key numbers (e.g. \$13.51B revenue, 70.1% GAAP gross margin).
   - The model correctly answered “**I don’t know**” when the document did not contain the requested information (AMD/Intel competitors).
-  - Retrieved contexts were generally relevant; remaining misses are mainly due to **PDF table extraction limits** in `pypdf`, not the RAG wiring.
+  - Retrieved contexts were generally relevant; potential risks are mainly due to **PDF table extraction limits** in `pypdf`, not the RAG wiring.
+
+- For more detailed high level solution and result analysis see [Project Canva Slide Deck](https://www.canva.com/design/DAHEGTYU8E4/aYHQRibEwWfAznp5KiQZOg/edit).
 
 ---
 
